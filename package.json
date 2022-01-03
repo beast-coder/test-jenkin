@@ -4,7 +4,7 @@
   "description": "nodejs insis",
   "author": "Carla Sampaio carlamsampaio01@gmail.com",
   "license": "MIT",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },

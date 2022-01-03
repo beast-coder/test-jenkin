@@ -1,19 +1,23 @@
-FROM node:8
+FROM node:14
 
+ENV PORT 2020
+ENV DIR /opt/httpd/src/
 # Create app directory
-WORKDIR /usr/src
+RUN mkdir -p ${DIR}
+WORKDIR ${DIR}
+#RUN mkdir -p pages
 
-# Install app dependencies
-# A wildcard is used to ensure both package.json AND package-lock.json are copied
-# where available (npm@5+)
-COPY package*.json ./
-
+# Installing dependencies
+COPY package*.json ${DIR}/
 RUN npm install
-# If you are building your code for production
-# RUN npm ci --only=production
 
-# Bundle app source
-COPY . .
+# Copying source files
+COPY . ${DIR}/
 
-EXPOSE 8765
-CMD [ "npm", "start" ]
+# Building app
+RUN npm run build
+EXPOSE ${PORT}
+
+# Running the app
+#CMD "npm" "run" "start"
+CMD "npm" "start"
